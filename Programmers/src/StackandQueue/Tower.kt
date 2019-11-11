@@ -1,5 +1,5 @@
 package StackandQueue
-fun Towersolution(heights: IntArray): IntArray{
+fun towersolution(heights: IntArray): IntArray{
     var answer = IntArray(heights.size) {0}
     for(i in (heights.size) downTo 1  ){
 
@@ -14,5 +14,5 @@ fun Towersolution(heights: IntArray): IntArray{
 }
  fun main(){
     var heights = intArrayOf(6,9,5,7,4)
-     Towersolution(heights).forEach { println(it) }
+     towersolution(heights).forEach { println(it) }
 }

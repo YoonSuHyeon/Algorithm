@@ -1,6 +1,6 @@
 package StackandQueue
 
-fun FunctionDevelopmentsolution(progresses: IntArray, speeds: IntArray): IntArray {
+fun functionDevelopmentsolution(progresses: IntArray, speeds: IntArray): IntArray {
    var temp = ArrayList<Int>()
     val answer = intArrayOf()
     for(i in progresses.indices){
@@ -40,5 +40,5 @@ fun FunctionDevelopmentsolution(progresses: IntArray, speeds: IntArray): IntArra
 fun main(){
     val progresses = intArrayOf(93,30,55,93)
     val speeds = intArrayOf(1,30,5,1)
-    FunctionDevelopmentsolution(progresses,speeds).forEach { println(it) }
+    functionDevelopmentsolution(progresses,speeds).forEach { println(it) }
 }
