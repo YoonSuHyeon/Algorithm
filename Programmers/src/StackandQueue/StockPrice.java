@@ -7,7 +7,32 @@ public class StockPrice {
         int[] answer = {};
         ArrayList<Integer> tempstack =new ArrayList<>();
         ArrayList<Integer> temp =new ArrayList<>();
-        for(int i = prices.length ;i>0;i--){
+        int count;
+        for(int i = 0 ;i <prices.length;i++){
+            count=0;
+            for(int j=i+1 ; j<prices.length;j++){
+
+                if(prices[j]>=prices[j-1]){
+                    if(prices[i]<=prices[j]){
+                        count ++;
+                    }
+                }else{
+                    if(prices[i]<=prices[j]){
+                        count ++;
+                    }
+                }
+            }
+             temp.add(count);
+        }
+
+        for(int i =0 ;i<prices.length;i++){
+            prices[i]=temp.get(i);
+        }
+        return prices;
+        /*for(int i =0 ; i<temp.size();i++){
+            System.out.println(temp.get(i));
+        }
+      /*  for(int i = prices.length ;i>0;i--){
             if(temp.size() ==0){
                 temp.add(prices[i-1]);
                 tempstack.add(0);
@@ -22,25 +47,25 @@ public class StockPrice {
                 tempstack.add(count);
             }
         }
-        /*for(int i =0;i<temp.size();i++){
+        for(int i =0;i<temp.size();i++){
             System.out.println(tempstack.get(i));
-         }*/
+         }
         for(int i=0;i<prices.length;i++){
 
             prices[i]=tempstack.remove(tempstack.size()-1);
         }
+    */
 
 
 
 
 
-        return prices;
     }
     public static void main(String args[]){
-        int i[] = {1, 2,15,4,3,4,1,2};
+        int i[] = {1,2,3,2,3};
         int b[]=StockPrice.solution(i);
-        for(int ij =0 ;ij<b.length;ij++){
+        /*for(int ij =0 ;ij<b.length;ij++){
             System.out.println(b[ij]);
-        }
+        }*/
     }
 }
