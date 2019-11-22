@@ -1,0 +1,5 @@
+package Greedy
+
+fun main(){
+
+}
