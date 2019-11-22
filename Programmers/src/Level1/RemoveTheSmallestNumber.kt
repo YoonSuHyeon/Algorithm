@@ -6,10 +6,10 @@ fun removeTheSmallestNumberSolution(arr: IntArray): IntArray {
         return arr
     }
 
-    var answer = arr.filter { arr.min()!=it }
+    return arr.filter { arr.min()!=it }
             .toIntArray()
 
-    return answer
+
 }
 fun main(){
     var arr = intArrayOf(4,3,2,1)
