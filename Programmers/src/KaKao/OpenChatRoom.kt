@@ -10,7 +10,6 @@ fun openChatRoomSolution(record: Array<String>): Array<String> {
             //userid.put(s[1],s[2])
         }
     }
-
     for(i in 0 until record.size){
         when(record[i].split(" ")[0]){
             "Enter" ->{
