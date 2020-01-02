@@ -2,9 +2,9 @@ package Level2
 
 fun makePrimeSolution(nums: IntArray): Int {
     var answer = 0
-    val temp  = HashSet<Int>()
+    val temp  = ArrayList<Int>()
     var sum=0
-    for(i in 0..nums.size-3){//3개를 찾고 size이기떄문에 -4
+    for(i in 0..nums.size-3){
         for(j in i+1..nums.size-2){
             for(k in j+1..nums.size-1){
                 temp.add(nums[i]+nums[j]+nums[k])
