@@ -13,10 +13,15 @@ fun joyStickSolution(name: String): Int {
         sample[i] = count--
     }
 
-    name.forEach { answer += sample[it]!!}
+    name.forEach { if(it=='A'){
+        answer += sample[it]!!-1
+    }else{
+        answer += sample[it]!!
+    }}
     answer+=name.length-1
     return answer
+
 }
 fun main(){
-    joyStickSolution("JAZ")
+    joyStickSolution("JAN")
 }
