@@ -18,6 +18,15 @@ fun carpetSolution(brown: Int, red: Int): IntArray {
     answer[1]= temp1[0]+2
     return answer
 }
+/*
+*
+* fun solution(brown: Int, red: Int): IntArray {
+        return (1..red)
+            .filter { red % it == 0 }
+            .first { brown == (red / it * 2) + (it * 2) + 4 }
+            .let { intArrayOf(red / it + 2, it + 2) }
+    }
+* */
 fun main(){
     carpetSolution(10,2)
 }
