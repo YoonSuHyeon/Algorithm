@@ -1,16 +1,21 @@
 package Greedy
 fun makeBigNumSolution(number: String, k: Int): String {
     var answer = ""
-    var temp =ArrayList<String>()
-    for(i in number){
-        temp.add(i.toString())
+    var stringSize = number.length - k  //구해야 길이
+    var index = 0
+    val list = mutableListOf<Char>()
+    while (stringSize > 0) {
+        val string = number.substring(index, number.length - (stringSize - 1))  // 구해지는값 + 나머지값을 남겨둬야하기때문.
+        string.max()?.let {max ->
+            index += string.indexOf(max) + 1
+            list.add(max)
+        }
+        stringSize -= 1
     }
-    for(i in 0 until k){
-        answer+=temp.max()
-        temp.remove(temp.max())
-    }
+    answer = list.joinToString("")
     return answer
 }
+
 fun main(){
-    makeBigNumSolution("1924",2)
+    makeBigNumSolution("4177252841",4)
 }
