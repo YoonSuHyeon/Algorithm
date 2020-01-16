@@ -1,18 +1,21 @@
 package KaKao
+
+import java.awt.event.ComponentAdapter
+
 fun candidateKeySolution(relation: Array<Array<String>>): Int {
     var answer = 0
-    var attributeIndex=relation[0].mapIndexed { index, s ->index}
-            .toMutableList()
+    var attributeIndex=relation[0].mapIndexed { index, s ->index.toString()}
+            .joinToString("")
+    var temp = setOf<String>()
+    for(i in relation[0].indices){ // 크기가 1,2,3,4.....
+        for(j in relation[0].indices){//처음부터 0,1,2,3....
+            for(k in j+i..relation[0].size){
 
-    for(i in attributeIndex.indices){
-        val temp=relation.map { it[i] }
-               .toSet()
-                .size
-        if(temp==relation.size){
-            attributeIndex.remove(i)
-            answer++
+            }
         }
     }
+
+
     return answer
 }
 
