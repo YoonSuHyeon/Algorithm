@@ -7,8 +7,6 @@ fun palindromeSolution(s: String): Int {
 
         }
     }
-
-
     return answer
 }
 fun main(){
