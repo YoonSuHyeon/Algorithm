@@ -1,9 +1,7 @@
 package programmers.lv2;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 철수와 영희는 선생님으로부터 숫자가 하나씩 적힌 카드들을 절반씩 나눠서 가진 후, 다음 두 조건 중 하나를 만족하는 가장 큰 양의 정수 a의 값을 구하려고 합니다.
@@ -22,53 +20,44 @@ import java.util.List;
 public class 숫자카드나누기 {
     public static int solution(int[] arrayA, int[] arrayB) {
 
+        int maxA = get(arrayA,arrayB);
+        int maxB = get(arrayB,arrayA);
 
-        int gcdA = gcd(arrayA);
-        int gcdB = gcd(arrayB);
-        List<Integer> all = new ArrayList<>();
+        int result = Math.max(maxA, maxB);
+        return result <= 1 ? 0 : result;
+    }
 
-        if (gcdA == 1) {
-            for (int aa = 1; aa <= gcdB; aa++) {
-                if ((gcdB % aa) == 0)
-                    all.add(aa);
-            }
+    private static int get(int[] arrayA, int[] arrayB) {
+        //ArrayA의 최대 공약수를 구한다.
+        int maxA = gcd(arrayA);
 
-            int max = all.stream().filter(i -> Arrays.stream(arrayA).allMatch(b -> b % i != 0)).max(Integer::compareTo).orElse(1);
+        //나온 값의 약수를 구한다.
+        List<Integer> divisors = getDivisors(maxA);
 
-            return max == 1 ? 0 : max;
+        //내림차순 정렬
+        divisors.sort(Comparator.reverseOrder());
 
-        } else if (gcdB == 1) {
-
-
-            for (int aa = 1; aa <= gcdA; aa++) {
-                if ((gcdA % aa) == 0)
-                    all.add(aa);
-            }
-
-            int max = all.stream().filter(i -> Arrays.stream(arrayB).allMatch(b -> b % i != 0)).max(Integer::compareTo).orElse(1);
-
-            return max == 1 ? 0 : max;
-
-        } else {
-            for (int aa = 1; aa <= gcdA; aa++) {
-                if ((gcdA % aa) == 0)
-                    all.add(aa);
-            }
-
-            for (int bb = 1; bb <= gcdB; bb++) {
-                if ((gcdA % bb) == 0 && !all.contains(bb)) {
-                    all.add(bb);
-                }
-
-            }
-
-            int a = all.stream().max(Integer::compareTo).orElse(1);
-            if (a == 1)
-                return 0;
-            return a;
+        for (int num : divisors) {
+            if (Arrays.stream(arrayB).allMatch(i -> i % num != 0))
+                return num;
         }
 
+        return 1;
+    }
 
+    private static List<Integer> getDivisors(int n) {
+        int sqrt = (int) Math.sqrt(n);
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        for (int i = 1; i <= sqrt; i++) {
+            if (n % i == 0) {
+                arr.add(i);
+                if (n / i != i) {
+                    arr.add(n / i);
+                }
+            }
+        }
+        return arr;
     }
 
     private static int gcd(int[] array) {
@@ -76,20 +65,20 @@ public class 숫자카드나누기 {
         if (array.length == 1)
             return array[0];
 
-        int be = array[0];
+        int gcd = array[0];
         for (int i = 1; i < array.length; i++) {
-            BigInteger a1 = BigInteger.valueOf(be);
+            BigInteger a1 = BigInteger.valueOf(gcd);
             BigInteger a2 = BigInteger.valueOf(array[i]);
 
-            be = a1.gcd(a2).intValue();
+            gcd = a1.gcd(a2).intValue();
         }
 
-        return be;
+        return gcd;
     }
 
     public static void main(String[] args) {
-        int[] arrayA = {14, 35, 119};
-        int[] arrayB = {18, 30, 102};
+        int[] arrayA = {10, 20};
+        int[] arrayB = {5, 17};
         System.out.println("result " + 숫자카드나누기.solution(arrayA, arrayB));
     }
 }
