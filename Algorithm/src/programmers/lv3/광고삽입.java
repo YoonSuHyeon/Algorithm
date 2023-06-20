@@ -1,4 +1,4 @@
-package programmers.lv2;
+package programmers.lv3;
 
 import java.util.stream.IntStream;
 
