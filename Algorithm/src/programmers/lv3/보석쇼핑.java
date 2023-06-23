@@ -6,6 +6,57 @@ import java.util.stream.Collectors;
 public class 보석쇼핑 {
 
 
+    public int[] solution2(String[] gems) {
+
+        //보석 개수
+        Set<String> set = Arrays.stream(gems).collect(Collectors.toSet());
+        int gemSize = set.size();
+
+        // 투 포인터 사용
+        int[] answer = new int[2];
+        int start = 0;
+        int end = 0;
+
+        //보석별 ,count  Map
+        Map<String, Integer> gemCountMap = new HashMap<>();
+        gemCountMap.put(gems[0], 1);
+
+        //최소길이
+        int min = gems.length;
+        while (start < gems.length) {
+
+            // 모든 보석을 얻은 경우
+            if (gemCountMap.size() >= gemSize) {
+
+                //min 보다 작은경우 값 저장
+                if (min > end - start) {
+                    answer[0] = start + 1;
+                    answer[1] = end + 1;
+                    min = end - start;
+                }
+
+                gemCountMap.compute(gems[start], (k, v) -> {
+                    if (v - 1 == 0)
+                        return null;
+                    else
+                        return v - 1;
+                });
+                start++;
+            } else {
+                // 모든 보석을 얻을 수 없는 경우
+                if (end + 1 >= gems.length)
+                    break;
+                else {
+                    //end를 늘려주면서
+                    end++;
+                    gemCountMap.merge(gems[end], 1, Integer::sum);
+                }
+
+            }
+        }
+        return answer;
+    }
+
     /**
      * 효율성 실패 투포인터로 다시 문제 풀어야함
      *
@@ -43,6 +94,9 @@ public class 보석쇼핑 {
     public static void main(String[] args) {
         String[] gems = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
 //        String[] gems = {"ZZZ", "YYY", "NNNN", "YYY", "BBB"};
-        new 보석쇼핑().solution(gems);
+        int[] ints = new 보석쇼핑().solution2(gems);
+        for (int i : ints) {
+            System.out.print(i + " ");
+        }
     }
 }
